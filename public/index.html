@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSE example</title>
+</head>
+<body>
+  <button>ping</button>
+  <div id="output"></div>
+  <script>
+    const button = document.querySelector('button');
+    const output = document.getElementById('output');
+    const source = new EventSource('/sse');
+
+    button.addEventListener('click', function() {
+      fetch('/ping');
+    });
+
+    source.onmessage = function(event) {
+      output.innerHTML += event.data + '<br>';
+    };
+  </script>
+</body>
+</html>
